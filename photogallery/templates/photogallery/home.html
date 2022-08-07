@@ -1,0 +1,38 @@
+{% extends 'photogallery/layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .albums{
+    border-radius: 25px;
+    border: 2px black solid;
+    padding: 4%;
+    height: 25%;
+    width: 25%;
+    margin: 25px 25px 0 25px;
+    }
+</style>
+    <div class="container">
+        <div class="title">
+            <h1><marquee behavior="slide" scrollamount = "5" direction="right">Add Your Photos</marquee></h1>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="container">
+        <a href="{% url 'create-album' %}"><button class="btn-primary btn" >Create Album</button></a>
+        <a href="{% url 'add-photo' %}"><button class="btn-primary btn" >Add Photo</button></a>
+    </div>
+    <div class="container" style="margin-top: 5%;">
+        <div class="row">
+            {% if albums.count != 0  %}
+            {% for album in albums %}
+                <div class="col albums">
+                    <a href="{% url 'soloalbum' album.id %}" style="text-decoration: none;">
+                    <h3>{{ album.album_name }}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock content %}

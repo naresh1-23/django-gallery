@@ -1,0 +1,33 @@
+{% extends 'photogallery/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="title">
+            <h1><marquee behavior="slide" scrollamount = "5" direction="right">Add Your Photos</marquee></h1>
+        </div>
+    </div>
+    <div class="container">
+        <form action ="" method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Photo Name</span>
+                <input type="text" class="form-control" placeholder="photo name" name="name" aria-label="Username" aria-describedby="addon-wrapping">
+              </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Photo </label>
+                <input name="photofile" class="form-control" type="file" id="formFile">
+              </div>
+            <br><label>Select Album</label>
+            <select name="albumname"  class="form-select" aria-label="Disabled select example">
+                {% for album in albums %}
+                <option>{{ album.album_name }}</option>
+                {% endfor %}
+              </select>
+              <br><br>
+            <div class="submit_btn">
+                <button class="btn btn-primary submit" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
